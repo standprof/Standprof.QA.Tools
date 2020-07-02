@@ -12,8 +12,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>BookingTek.QA.TestResultsDB</RootNamespace>
-    <AssemblyName>BookingTek.QA.TestResultsDB</AssemblyName>
+    <RootNamespace>Standprof.QA.DB.TestArtifacts</RootNamespace>
+    <AssemblyName>Standprof.QA.DB.TestArtifacts</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -69,13 +69,16 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tbl_TestResults.sql" />
-    <Build Include="Security\master.sql" />
-    <Build Include="Security\master_1.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Stored Procedures\usp_GetTestResults.sql" />
     <Build Include="dbo\Stored Procedures\usp_GetHistoryOfTest.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareWithDevDBServer.scmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 </Project>

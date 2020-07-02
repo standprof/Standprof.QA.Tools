@@ -31,6 +31,9 @@
             this.Tabs = new System.Windows.Forms.TabControl();
             this.LatestTestResultsTab = new System.Windows.Forms.TabPage();
             this.SearchResultsPanel = new System.Windows.Forms.Panel();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.txtAnyText = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.summaryGrid = new System.Windows.Forms.DataGridView();
             this.detailsGrid = new System.Windows.Forms.DataGridView();
             this.SearchCriteriaPanel = new System.Windows.Forms.Panel();
@@ -51,9 +54,8 @@
             this.projectsDropdownOnHistoryTab = new System.Windows.Forms.ComboBox();
             this.testIdTextBox = new System.Windows.Forms.TextBox();
             this.testIdLbl = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtAnyText = new System.Windows.Forms.TextBox();
-            this.btnFilter = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.LatestTestResultsTab.SuspendLayout();
             this.SearchResultsPanel.SuspendLayout();
@@ -64,6 +66,7 @@
             this.testHistoryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.testHistoryGrid)).BeginInit();
             this.filterHistroySearchPanel.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tabs
@@ -73,10 +76,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tabs.Controls.Add(this.LatestTestResultsTab);
             this.Tabs.Controls.Add(this.historyOfTestTab);
-            this.Tabs.Location = new System.Drawing.Point(22, 12);
+            this.Tabs.Location = new System.Drawing.Point(22, 43);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(1037, 733);
+            this.Tabs.Size = new System.Drawing.Size(1037, 702);
             this.Tabs.TabIndex = 5;
             // 
             // LatestTestResultsTab
@@ -85,8 +88,8 @@
             this.LatestTestResultsTab.Controls.Add(this.SearchCriteriaPanel);
             this.LatestTestResultsTab.Location = new System.Drawing.Point(4, 22);
             this.LatestTestResultsTab.Name = "LatestTestResultsTab";
-            this.LatestTestResultsTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.LatestTestResultsTab.Size = new System.Drawing.Size(1029, 707);
+            this.LatestTestResultsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.LatestTestResultsTab.Size = new System.Drawing.Size(1029, 676);
             this.LatestTestResultsTab.TabIndex = 0;
             this.LatestTestResultsTab.Text = "Latest Test Results";
             this.LatestTestResultsTab.UseVisualStyleBackColor = true;
@@ -104,8 +107,35 @@
             this.SearchResultsPanel.Controls.Add(this.detailsGrid);
             this.SearchResultsPanel.Location = new System.Drawing.Point(11, 88);
             this.SearchResultsPanel.Name = "SearchResultsPanel";
-            this.SearchResultsPanel.Size = new System.Drawing.Size(1004, 604);
+            this.SearchResultsPanel.Size = new System.Drawing.Size(1004, 573);
             this.SearchResultsPanel.TabIndex = 1;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(538, 135);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 9;
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // txtAnyText
+            // 
+            this.txtAnyText.Location = new System.Drawing.Point(16, 137);
+            this.txtAnyText.Name = "txtAnyText";
+            this.txtAnyText.Size = new System.Drawing.Size(494, 20);
+            this.txtAnyText.TabIndex = 8;
+            this.txtAnyText.WordWrap = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 121);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Any text:";
             // 
             // summaryGrid
             // 
@@ -131,7 +161,7 @@
             this.detailsGrid.Name = "detailsGrid";
             this.detailsGrid.ReadOnly = true;
             this.detailsGrid.RowHeadersWidth = 51;
-            this.detailsGrid.Size = new System.Drawing.Size(1000, 410);
+            this.detailsGrid.Size = new System.Drawing.Size(1000, 379);
             this.detailsGrid.TabIndex = 4;
             this.detailsGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailsGrid_CellDoubleClick);
             // 
@@ -151,7 +181,7 @@
             this.SearchCriteriaPanel.Controls.Add(this.projectsDropdown);
             this.SearchCriteriaPanel.Location = new System.Drawing.Point(11, 13);
             this.SearchCriteriaPanel.Name = "SearchCriteriaPanel";
-            this.SearchCriteriaPanel.Size = new System.Drawing.Size(1004, 222);
+            this.SearchCriteriaPanel.Size = new System.Drawing.Size(1004, 191);
             this.SearchCriteriaPanel.TabIndex = 0;
             // 
             // ExportToExcelBtn
@@ -235,8 +265,8 @@
             this.historyOfTestTab.Controls.Add(this.filterHistroySearchPanel);
             this.historyOfTestTab.Location = new System.Drawing.Point(4, 22);
             this.historyOfTestTab.Name = "historyOfTestTab";
-            this.historyOfTestTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.historyOfTestTab.Size = new System.Drawing.Size(896, 555);
+            this.historyOfTestTab.Padding = new System.Windows.Forms.Padding(3);
+            this.historyOfTestTab.Size = new System.Drawing.Size(1029, 707);
             this.historyOfTestTab.TabIndex = 1;
             this.historyOfTestTab.Text = "History of Test";
             this.historyOfTestTab.UseVisualStyleBackColor = true;
@@ -326,32 +356,22 @@
             this.testIdLbl.TabIndex = 0;
             this.testIdLbl.Text = "Test ID:";
             // 
-            // label2
+            // menuStrip1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 121);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Any text:";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1082, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // txtAnyText
+            // aboutToolStripMenuItem
             // 
-            this.txtAnyText.Location = new System.Drawing.Point(16, 137);
-            this.txtAnyText.Name = "txtAnyText";
-            this.txtAnyText.Size = new System.Drawing.Size(494, 20);
-            this.txtAnyText.TabIndex = 8;
-            this.txtAnyText.WordWrap = false;
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Location = new System.Drawing.Point(538, 135);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(75, 23);
-            this.btnFilter.TabIndex = 9;
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // ShowTestResultsFrm
             // 
@@ -360,6 +380,8 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1082, 770);
             this.Controls.Add(this.Tabs);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "ShowTestResultsFrm";
             this.Text = "Automated Test Results Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -376,7 +398,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.testHistoryGrid)).EndInit();
             this.filterHistroySearchPanel.ResumeLayout(false);
             this.filterHistroySearchPanel.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -408,6 +433,8 @@
         private System.Windows.Forms.TextBox txtAnyText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

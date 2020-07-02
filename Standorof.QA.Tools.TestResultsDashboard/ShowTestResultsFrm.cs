@@ -217,6 +217,14 @@ namespace ShowTestResults
             Process.Start(fileFullPath);
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutBox = new AboutBox1();
+            aboutBox.ShowDialog();
+            //MessageBox.Show("Automated Test Results Dashboard\r\n" +
+            //                "shows the results of executed automated tests\r\n" + 
+            //                "© Standrof LTD", "About");
 
+        }
     }
 }

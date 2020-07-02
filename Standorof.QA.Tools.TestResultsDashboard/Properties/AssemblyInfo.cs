@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ShowTestResults")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Automated Test Results Dashboard")]
+[assembly: AssemblyDescription("Shows  results of executed automated tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ShowTestResults")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("Standprof")]
+[assembly: AssemblyProduct("Automated Test Results Dashboard")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
