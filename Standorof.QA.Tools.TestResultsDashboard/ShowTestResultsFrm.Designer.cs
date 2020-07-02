@@ -51,6 +51,9 @@
             this.projectsDropdownOnHistoryTab = new System.Windows.Forms.ComboBox();
             this.testIdTextBox = new System.Windows.Forms.TextBox();
             this.testIdLbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAnyText = new System.Windows.Forms.TextBox();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
             this.LatestTestResultsTab.SuspendLayout();
             this.SearchResultsPanel.SuspendLayout();
@@ -70,22 +73,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tabs.Controls.Add(this.LatestTestResultsTab);
             this.Tabs.Controls.Add(this.historyOfTestTab);
-            this.Tabs.Location = new System.Drawing.Point(29, 15);
-            this.Tabs.Margin = new System.Windows.Forms.Padding(4);
+            this.Tabs.Location = new System.Drawing.Point(22, 12);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(1205, 715);
+            this.Tabs.Size = new System.Drawing.Size(1037, 733);
             this.Tabs.TabIndex = 5;
             // 
             // LatestTestResultsTab
             // 
             this.LatestTestResultsTab.Controls.Add(this.SearchResultsPanel);
             this.LatestTestResultsTab.Controls.Add(this.SearchCriteriaPanel);
-            this.LatestTestResultsTab.Location = new System.Drawing.Point(4, 25);
-            this.LatestTestResultsTab.Margin = new System.Windows.Forms.Padding(4);
+            this.LatestTestResultsTab.Location = new System.Drawing.Point(4, 22);
             this.LatestTestResultsTab.Name = "LatestTestResultsTab";
-            this.LatestTestResultsTab.Padding = new System.Windows.Forms.Padding(4);
-            this.LatestTestResultsTab.Size = new System.Drawing.Size(1197, 686);
+            this.LatestTestResultsTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LatestTestResultsTab.Size = new System.Drawing.Size(1029, 707);
             this.LatestTestResultsTab.TabIndex = 0;
             this.LatestTestResultsTab.Text = "Latest Test Results";
             this.LatestTestResultsTab.UseVisualStyleBackColor = true;
@@ -96,12 +97,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchResultsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SearchResultsPanel.Controls.Add(this.btnFilter);
+            this.SearchResultsPanel.Controls.Add(this.txtAnyText);
+            this.SearchResultsPanel.Controls.Add(this.label2);
             this.SearchResultsPanel.Controls.Add(this.summaryGrid);
             this.SearchResultsPanel.Controls.Add(this.detailsGrid);
-            this.SearchResultsPanel.Location = new System.Drawing.Point(15, 110);
-            this.SearchResultsPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.SearchResultsPanel.Location = new System.Drawing.Point(11, 88);
             this.SearchResultsPanel.Name = "SearchResultsPanel";
-            this.SearchResultsPanel.Size = new System.Drawing.Size(1161, 555);
+            this.SearchResultsPanel.Size = new System.Drawing.Size(1004, 604);
             this.SearchResultsPanel.TabIndex = 1;
             // 
             // summaryGrid
@@ -109,11 +112,10 @@
             this.summaryGrid.AllowUserToDeleteRows = false;
             this.summaryGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.summaryGrid.Location = new System.Drawing.Point(-1, -1);
-            this.summaryGrid.Margin = new System.Windows.Forms.Padding(4);
             this.summaryGrid.Name = "summaryGrid";
             this.summaryGrid.ReadOnly = true;
             this.summaryGrid.RowHeadersWidth = 51;
-            this.summaryGrid.Size = new System.Drawing.Size(397, 130);
+            this.summaryGrid.Size = new System.Drawing.Size(298, 106);
             this.summaryGrid.TabIndex = 4;
             // 
             // detailsGrid
@@ -125,12 +127,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.detailsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.detailsGrid.Location = new System.Drawing.Point(-1, 137);
-            this.detailsGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.detailsGrid.Location = new System.Drawing.Point(-1, 189);
             this.detailsGrid.Name = "detailsGrid";
             this.detailsGrid.ReadOnly = true;
             this.detailsGrid.RowHeadersWidth = 51;
-            this.detailsGrid.Size = new System.Drawing.Size(1156, 412);
+            this.detailsGrid.Size = new System.Drawing.Size(1000, 410);
             this.detailsGrid.TabIndex = 4;
             this.detailsGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailsGrid_CellDoubleClick);
             // 
@@ -148,18 +149,16 @@
             this.SearchCriteriaPanel.Controls.Add(this.environmentsDropdown);
             this.SearchCriteriaPanel.Controls.Add(this.projectLbl);
             this.SearchCriteriaPanel.Controls.Add(this.projectsDropdown);
-            this.SearchCriteriaPanel.Location = new System.Drawing.Point(15, 16);
-            this.SearchCriteriaPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.SearchCriteriaPanel.Location = new System.Drawing.Point(11, 13);
             this.SearchCriteriaPanel.Name = "SearchCriteriaPanel";
-            this.SearchCriteriaPanel.Size = new System.Drawing.Size(1161, 86);
+            this.SearchCriteriaPanel.Size = new System.Drawing.Size(1004, 222);
             this.SearchCriteriaPanel.TabIndex = 0;
             // 
             // ExportToExcelBtn
             // 
-            this.ExportToExcelBtn.Location = new System.Drawing.Point(825, 32);
-            this.ExportToExcelBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.ExportToExcelBtn.Location = new System.Drawing.Point(628, 28);
             this.ExportToExcelBtn.Name = "ExportToExcelBtn";
-            this.ExportToExcelBtn.Size = new System.Drawing.Size(145, 28);
+            this.ExportToExcelBtn.Size = new System.Drawing.Size(109, 23);
             this.ExportToExcelBtn.TabIndex = 6;
             this.ExportToExcelBtn.Text = "Export To Excel";
             this.ExportToExcelBtn.UseVisualStyleBackColor = true;
@@ -167,10 +166,9 @@
             // 
             // SearchResultsButton
             // 
-            this.SearchResultsButton.Location = new System.Drawing.Point(704, 32);
-            this.SearchResultsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SearchResultsButton.Location = new System.Drawing.Point(538, 28);
             this.SearchResultsButton.Name = "SearchResultsButton";
-            this.SearchResultsButton.Size = new System.Drawing.Size(100, 28);
+            this.SearchResultsButton.Size = new System.Drawing.Size(75, 23);
             this.SearchResultsButton.TabIndex = 3;
             this.SearchResultsButton.Text = "Search";
             this.SearchResultsButton.UseVisualStyleBackColor = true;
@@ -179,29 +177,26 @@
             // testRunAfterDateTimeLbl
             // 
             this.testRunAfterDateTimeLbl.AutoSize = true;
-            this.testRunAfterDateTimeLbl.Location = new System.Drawing.Point(413, 15);
-            this.testRunAfterDateTimeLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.testRunAfterDateTimeLbl.Location = new System.Drawing.Point(310, 12);
             this.testRunAfterDateTimeLbl.Name = "testRunAfterDateTimeLbl";
-            this.testRunAfterDateTimeLbl.Size = new System.Drawing.Size(146, 17);
+            this.testRunAfterDateTimeLbl.Size = new System.Drawing.Size(108, 13);
             this.testRunAfterDateTimeLbl.TabIndex = 5;
             this.testRunAfterDateTimeLbl.Text = "Tests ran on or after: ";
             // 
             // testsRanAfterDateTimePicker
             // 
             this.testsRanAfterDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.testsRanAfterDateTimePicker.Location = new System.Drawing.Point(417, 36);
-            this.testsRanAfterDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
+            this.testsRanAfterDateTimePicker.Location = new System.Drawing.Point(313, 29);
             this.testsRanAfterDateTimePicker.Name = "testsRanAfterDateTimePicker";
-            this.testsRanAfterDateTimePicker.Size = new System.Drawing.Size(265, 22);
+            this.testsRanAfterDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.testsRanAfterDateTimePicker.TabIndex = 2;
             // 
             // environmentLbl
             // 
             this.environmentLbl.AutoSize = true;
-            this.environmentLbl.Location = new System.Drawing.Point(216, 15);
-            this.environmentLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.environmentLbl.Location = new System.Drawing.Point(162, 12);
             this.environmentLbl.Name = "environmentLbl";
-            this.environmentLbl.Size = new System.Drawing.Size(95, 17);
+            this.environmentLbl.Size = new System.Drawing.Size(72, 13);
             this.environmentLbl.TabIndex = 3;
             this.environmentLbl.Text = "Environment: ";
             // 
@@ -210,19 +205,17 @@
             this.environmentsDropdown.FormattingEnabled = true;
             this.environmentsDropdown.Items.AddRange(new object[] {
             "develop"});
-            this.environmentsDropdown.Location = new System.Drawing.Point(220, 34);
-            this.environmentsDropdown.Margin = new System.Windows.Forms.Padding(4);
+            this.environmentsDropdown.Location = new System.Drawing.Point(165, 28);
             this.environmentsDropdown.Name = "environmentsDropdown";
-            this.environmentsDropdown.Size = new System.Drawing.Size(175, 24);
+            this.environmentsDropdown.Size = new System.Drawing.Size(132, 21);
             this.environmentsDropdown.TabIndex = 1;
             // 
             // projectLbl
             // 
             this.projectLbl.AutoSize = true;
-            this.projectLbl.Location = new System.Drawing.Point(17, 15);
-            this.projectLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.projectLbl.Location = new System.Drawing.Point(13, 12);
             this.projectLbl.Name = "projectLbl";
-            this.projectLbl.Size = new System.Drawing.Size(60, 17);
+            this.projectLbl.Size = new System.Drawing.Size(46, 13);
             this.projectLbl.TabIndex = 1;
             this.projectLbl.Text = "Project: ";
             // 
@@ -231,21 +224,19 @@
             this.projectsDropdown.FormattingEnabled = true;
             this.projectsDropdown.Items.AddRange(new object[] {
             "TableRes"});
-            this.projectsDropdown.Location = new System.Drawing.Point(21, 34);
-            this.projectsDropdown.Margin = new System.Windows.Forms.Padding(4);
+            this.projectsDropdown.Location = new System.Drawing.Point(16, 28);
             this.projectsDropdown.Name = "projectsDropdown";
-            this.projectsDropdown.Size = new System.Drawing.Size(175, 24);
+            this.projectsDropdown.Size = new System.Drawing.Size(132, 21);
             this.projectsDropdown.TabIndex = 0;
             // 
             // historyOfTestTab
             // 
             this.historyOfTestTab.Controls.Add(this.testHistoryPanel);
             this.historyOfTestTab.Controls.Add(this.filterHistroySearchPanel);
-            this.historyOfTestTab.Location = new System.Drawing.Point(4, 25);
-            this.historyOfTestTab.Margin = new System.Windows.Forms.Padding(4);
+            this.historyOfTestTab.Location = new System.Drawing.Point(4, 22);
             this.historyOfTestTab.Name = "historyOfTestTab";
-            this.historyOfTestTab.Padding = new System.Windows.Forms.Padding(4);
-            this.historyOfTestTab.Size = new System.Drawing.Size(1197, 686);
+            this.historyOfTestTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.historyOfTestTab.Size = new System.Drawing.Size(896, 555);
             this.historyOfTestTab.TabIndex = 1;
             this.historyOfTestTab.Text = "History of Test";
             this.historyOfTestTab.UseVisualStyleBackColor = true;
@@ -256,10 +247,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.testHistoryPanel.Controls.Add(this.testHistoryGrid);
-            this.testHistoryPanel.Location = new System.Drawing.Point(8, 106);
-            this.testHistoryPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.testHistoryPanel.Location = new System.Drawing.Point(6, 86);
             this.testHistoryPanel.Name = "testHistoryPanel";
-            this.testHistoryPanel.Size = new System.Drawing.Size(1179, 570);
+            this.testHistoryPanel.Size = new System.Drawing.Size(884, 463);
             this.testHistoryPanel.TabIndex = 1;
             // 
             // testHistoryGrid
@@ -271,12 +261,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.testHistoryGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.testHistoryGrid.Location = new System.Drawing.Point(4, 4);
-            this.testHistoryGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.testHistoryGrid.Location = new System.Drawing.Point(3, 3);
             this.testHistoryGrid.Name = "testHistoryGrid";
             this.testHistoryGrid.ReadOnly = true;
             this.testHistoryGrid.RowHeadersWidth = 51;
-            this.testHistoryGrid.Size = new System.Drawing.Size(1171, 562);
+            this.testHistoryGrid.Size = new System.Drawing.Size(878, 457);
             this.testHistoryGrid.TabIndex = 0;
             // 
             // filterHistroySearchPanel
@@ -289,18 +278,16 @@
             this.filterHistroySearchPanel.Controls.Add(this.projectsDropdownOnHistoryTab);
             this.filterHistroySearchPanel.Controls.Add(this.testIdTextBox);
             this.filterHistroySearchPanel.Controls.Add(this.testIdLbl);
-            this.filterHistroySearchPanel.Location = new System.Drawing.Point(8, 7);
-            this.filterHistroySearchPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.filterHistroySearchPanel.Location = new System.Drawing.Point(6, 6);
             this.filterHistroySearchPanel.Name = "filterHistroySearchPanel";
-            this.filterHistroySearchPanel.Size = new System.Drawing.Size(1179, 91);
+            this.filterHistroySearchPanel.Size = new System.Drawing.Size(884, 74);
             this.filterHistroySearchPanel.TabIndex = 0;
             // 
             // searchForHistoryOfTestBtn
             // 
-            this.searchForHistoryOfTestBtn.Location = new System.Drawing.Point(403, 44);
-            this.searchForHistoryOfTestBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.searchForHistoryOfTestBtn.Location = new System.Drawing.Point(302, 36);
             this.searchForHistoryOfTestBtn.Name = "searchForHistoryOfTestBtn";
-            this.searchForHistoryOfTestBtn.Size = new System.Drawing.Size(100, 28);
+            this.searchForHistoryOfTestBtn.Size = new System.Drawing.Size(75, 23);
             this.searchForHistoryOfTestBtn.TabIndex = 2;
             this.searchForHistoryOfTestBtn.Text = "Search";
             this.searchForHistoryOfTestBtn.UseVisualStyleBackColor = true;
@@ -309,53 +296,77 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(14, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Project:";
             // 
             // projectsDropdownOnHistoryTab
             // 
             this.projectsDropdownOnHistoryTab.FormattingEnabled = true;
-            this.projectsDropdownOnHistoryTab.Location = new System.Drawing.Point(23, 43);
-            this.projectsDropdownOnHistoryTab.Margin = new System.Windows.Forms.Padding(4);
+            this.projectsDropdownOnHistoryTab.Location = new System.Drawing.Point(17, 35);
             this.projectsDropdownOnHistoryTab.Name = "projectsDropdownOnHistoryTab";
-            this.projectsDropdownOnHistoryTab.Size = new System.Drawing.Size(175, 24);
+            this.projectsDropdownOnHistoryTab.Size = new System.Drawing.Size(132, 21);
             this.projectsDropdownOnHistoryTab.TabIndex = 0;
             // 
             // testIdTextBox
             // 
-            this.testIdTextBox.Location = new System.Drawing.Point(225, 44);
-            this.testIdTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.testIdTextBox.Location = new System.Drawing.Point(169, 36);
             this.testIdTextBox.Name = "testIdTextBox";
-            this.testIdTextBox.Size = new System.Drawing.Size(152, 22);
+            this.testIdTextBox.Size = new System.Drawing.Size(115, 20);
             this.testIdTextBox.TabIndex = 1;
             // 
             // testIdLbl
             // 
             this.testIdLbl.AutoSize = true;
-            this.testIdLbl.Location = new System.Drawing.Point(221, 23);
-            this.testIdLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.testIdLbl.Location = new System.Drawing.Point(166, 19);
             this.testIdLbl.Name = "testIdLbl";
-            this.testIdLbl.Size = new System.Drawing.Size(57, 17);
+            this.testIdLbl.Size = new System.Drawing.Size(45, 13);
             this.testIdLbl.TabIndex = 0;
             this.testIdLbl.Text = "Test ID:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 121);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Any text:";
+            // 
+            // txtAnyText
+            // 
+            this.txtAnyText.Location = new System.Drawing.Point(16, 137);
+            this.txtAnyText.Name = "txtAnyText";
+            this.txtAnyText.Size = new System.Drawing.Size(494, 20);
+            this.txtAnyText.TabIndex = 8;
+            this.txtAnyText.WordWrap = false;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(538, 135);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 9;
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // ShowTestResultsFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1265, 761);
+            this.ClientSize = new System.Drawing.Size(1082, 770);
             this.Controls.Add(this.Tabs);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ShowTestResultsFrm";
             this.Text = "Automated Test Results Dashboard";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Tabs.ResumeLayout(false);
             this.LatestTestResultsTab.ResumeLayout(false);
             this.SearchResultsPanel.ResumeLayout(false);
+            this.SearchResultsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.summaryGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsGrid)).EndInit();
             this.SearchCriteriaPanel.ResumeLayout(false);
@@ -394,6 +405,9 @@
         private System.Windows.Forms.Panel testHistoryPanel;
         private System.Windows.Forms.DataGridView testHistoryGrid;
         private System.Windows.Forms.Button ExportToExcelBtn;
+        private System.Windows.Forms.TextBox txtAnyText;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
 

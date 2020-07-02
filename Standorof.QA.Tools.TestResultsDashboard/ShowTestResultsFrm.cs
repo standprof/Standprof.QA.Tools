@@ -16,6 +16,7 @@ namespace ShowTestResults
         private readonly Results _results;
         private readonly HistoryOfTest _historyOfTest;
         private DataSet _searchResultsDataSet;
+        private DataTable _testDetailsTable;
 
         public ShowTestResultsFrm()
         {
@@ -61,20 +62,54 @@ namespace ShowTestResults
             _searchResultsDataSet = FetchResults();
 
             var testSummaryTable = _searchResultsDataSet.Tables[0];
-            var testDetailsTable = _searchResultsDataSet.Tables[1];
+            _testDetailsTable = _searchResultsDataSet.Tables[1];
+
+            if (_testDetailsTable.Rows.Count == 0)
+            {
+                MessageBox.Show("No test results are found. Try other search criteria.");
+                return;
+            }
 
             summaryGrid.DataSource = testSummaryTable;
             summaryGrid.Refresh();
+            summaryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-            if (testDetailsTable.Rows.Count == 0)
+            if (_testDetailsTable.Rows.Count == 0)
             {
                 detailsGrid.DataSource = null;
                 detailsGrid.Refresh();
                 return;
             }
 
-            detailsGrid.DataSource = testDetailsTable;
+            detailsGrid.DataSource = _testDetailsTable;
+            detailsGrid.Columns["TestSummary"].Width = 300;
             detailsGrid.Refresh();
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtAnyText.Text))
+            {
+                detailsGrid.DataSource = _testDetailsTable;
+                detailsGrid.Refresh();
+                return;
+            }
+            
+            string keyword = txtAnyText.Text;
+            string sqlWhere = $"Feature like '%{keyword}%' OR TestSummary like '%{keyword}%' OR TestSteps like '%{keyword}%' OR Error like '%{keyword}%'";
+            var selectedRows = _searchResultsDataSet.Tables[1].Select(sqlWhere);
+            if (selectedRows.Length > 0)
+            {
+                var testDetailsTableFiltered = selectedRows.CopyToDataTable();
+                detailsGrid.DataSource = testDetailsTableFiltered;
+                detailsGrid.Refresh();
+            }
+            else
+            {
+                detailsGrid.DataSource = null;
+                detailsGrid.Refresh();
+                MessageBox.Show("No test results are found. Try other search criteria.");
+            }
         }
 
         private DataSet FetchResults()
@@ -102,6 +137,7 @@ namespace ShowTestResults
             var testHistoryTable = testHistoryDataSet.Tables[0];
 
             testHistoryGrid.DataSource = testHistoryTable;
+            testHistoryGrid.Columns["TestSummary"].Width = 300;
             testHistoryGrid.Refresh();
 
             if (testHistoryTable.Rows.Count == 0)
@@ -180,6 +216,7 @@ namespace ShowTestResults
 
             Process.Start(fileFullPath);
         }
+
 
     }
 }
