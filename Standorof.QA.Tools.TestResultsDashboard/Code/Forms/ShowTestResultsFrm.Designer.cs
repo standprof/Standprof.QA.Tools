@@ -1,4 +1,4 @@
-﻿namespace ShowTestResults
+﻿namespace TestResultsDashboard.Code.Forms
 {
     partial class ShowTestResultsFrm
     {
@@ -52,7 +52,7 @@
             this.searchForHistoryOfTestBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.projectsDropdownOnHistoryTab = new System.Windows.Forms.ComboBox();
-            this.testIdTextBox = new System.Windows.Forms.TextBox();
+            this.testIdTextBoxOnHistoryTab = new System.Windows.Forms.TextBox();
             this.testIdLbl = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -258,6 +258,7 @@
             this.projectsDropdown.Name = "projectsDropdown";
             this.projectsDropdown.Size = new System.Drawing.Size(132, 21);
             this.projectsDropdown.TabIndex = 0;
+            this.projectsDropdown.TextChanged += new System.EventHandler(this.projectsDropdown_TextChanged);
             // 
             // historyOfTestTab
             // 
@@ -266,7 +267,7 @@
             this.historyOfTestTab.Location = new System.Drawing.Point(4, 22);
             this.historyOfTestTab.Name = "historyOfTestTab";
             this.historyOfTestTab.Padding = new System.Windows.Forms.Padding(3);
-            this.historyOfTestTab.Size = new System.Drawing.Size(1029, 707);
+            this.historyOfTestTab.Size = new System.Drawing.Size(1029, 676);
             this.historyOfTestTab.TabIndex = 1;
             this.historyOfTestTab.Text = "History of Test";
             this.historyOfTestTab.UseVisualStyleBackColor = true;
@@ -276,10 +277,11 @@
             this.testHistoryPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.testHistoryPanel.AutoSize = true;
             this.testHistoryPanel.Controls.Add(this.testHistoryGrid);
             this.testHistoryPanel.Location = new System.Drawing.Point(6, 86);
             this.testHistoryPanel.Name = "testHistoryPanel";
-            this.testHistoryPanel.Size = new System.Drawing.Size(884, 463);
+            this.testHistoryPanel.Size = new System.Drawing.Size(1017, 584);
             this.testHistoryPanel.TabIndex = 1;
             // 
             // testHistoryGrid
@@ -287,15 +289,13 @@
             this.testHistoryGrid.AllowUserToAddRows = false;
             this.testHistoryGrid.AllowUserToDeleteRows = false;
             this.testHistoryGrid.AllowUserToOrderColumns = true;
-            this.testHistoryGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.testHistoryGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.testHistoryGrid.Location = new System.Drawing.Point(3, 3);
+            this.testHistoryGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.testHistoryGrid.Location = new System.Drawing.Point(0, 0);
             this.testHistoryGrid.Name = "testHistoryGrid";
             this.testHistoryGrid.ReadOnly = true;
             this.testHistoryGrid.RowHeadersWidth = 51;
-            this.testHistoryGrid.Size = new System.Drawing.Size(878, 457);
+            this.testHistoryGrid.Size = new System.Drawing.Size(1017, 584);
             this.testHistoryGrid.TabIndex = 0;
             // 
             // filterHistroySearchPanel
@@ -306,11 +306,11 @@
             this.filterHistroySearchPanel.Controls.Add(this.searchForHistoryOfTestBtn);
             this.filterHistroySearchPanel.Controls.Add(this.label1);
             this.filterHistroySearchPanel.Controls.Add(this.projectsDropdownOnHistoryTab);
-            this.filterHistroySearchPanel.Controls.Add(this.testIdTextBox);
+            this.filterHistroySearchPanel.Controls.Add(this.testIdTextBoxOnHistoryTab);
             this.filterHistroySearchPanel.Controls.Add(this.testIdLbl);
             this.filterHistroySearchPanel.Location = new System.Drawing.Point(6, 6);
             this.filterHistroySearchPanel.Name = "filterHistroySearchPanel";
-            this.filterHistroySearchPanel.Size = new System.Drawing.Size(884, 74);
+            this.filterHistroySearchPanel.Size = new System.Drawing.Size(1017, 74);
             this.filterHistroySearchPanel.TabIndex = 0;
             // 
             // searchForHistoryOfTestBtn
@@ -340,12 +340,12 @@
             this.projectsDropdownOnHistoryTab.Size = new System.Drawing.Size(132, 21);
             this.projectsDropdownOnHistoryTab.TabIndex = 0;
             // 
-            // testIdTextBox
+            // testIdTextBoxOnHistoryTab
             // 
-            this.testIdTextBox.Location = new System.Drawing.Point(169, 36);
-            this.testIdTextBox.Name = "testIdTextBox";
-            this.testIdTextBox.Size = new System.Drawing.Size(115, 20);
-            this.testIdTextBox.TabIndex = 1;
+            this.testIdTextBoxOnHistoryTab.Location = new System.Drawing.Point(169, 36);
+            this.testIdTextBoxOnHistoryTab.Name = "testIdTextBoxOnHistoryTab";
+            this.testIdTextBoxOnHistoryTab.Size = new System.Drawing.Size(115, 20);
+            this.testIdTextBoxOnHistoryTab.TabIndex = 1;
             // 
             // testIdLbl
             // 
@@ -394,6 +394,7 @@
             this.SearchCriteriaPanel.ResumeLayout(false);
             this.SearchCriteriaPanel.PerformLayout();
             this.historyOfTestTab.ResumeLayout(false);
+            this.historyOfTestTab.PerformLayout();
             this.testHistoryPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.testHistoryGrid)).EndInit();
             this.filterHistroySearchPanel.ResumeLayout(false);
@@ -424,7 +425,7 @@
         private System.Windows.Forms.Panel filterHistroySearchPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox projectsDropdownOnHistoryTab;
-        private System.Windows.Forms.TextBox testIdTextBox;
+        private System.Windows.Forms.TextBox testIdTextBoxOnHistoryTab;
         private System.Windows.Forms.Label testIdLbl;
         private System.Windows.Forms.Button searchForHistoryOfTestBtn;
         private System.Windows.Forms.Panel testHistoryPanel;

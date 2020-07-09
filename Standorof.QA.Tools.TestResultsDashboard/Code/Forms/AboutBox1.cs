@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using System.Windows.Forms;
 
-namespace ShowTestResults
+namespace TestResultsDashboard.Code.Forms
 {
     partial class AboutBox1 : Form
     {
         public AboutBox1()
         {
             InitializeComponent();
-            this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.textBoxDescription.Text = AssemblyDescription;
+            Text = $"About {AssemblyTitle}";
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = $"Version {AssemblyVersion}";
+            labelCopyright.Text = AssemblyCopyright;
+            textBoxDescription.Text = AssemblyDescription;
         }
 
         #region Assembly Attribute Accessors
@@ -40,13 +34,7 @@ namespace ShowTestResults
             }
         }
 
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
-        }
+        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public string AssemblyDescription
         {

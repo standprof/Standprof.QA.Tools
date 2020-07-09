@@ -1,4 +1,4 @@
-﻿namespace ShowTestResults
+﻿namespace TestResultsDashboard.Code.Forms
 {
     partial class AboutBox1
     {
@@ -42,8 +42,8 @@
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.labelVersion, 1, 1);
@@ -54,12 +54,12 @@
             this.tableLayoutPanel.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 6;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.65193F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.018868F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.28177F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.30939F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.07435F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.07435F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.82035F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.041314F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.49949F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.49014F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(505, 137);
             this.tableLayoutPanel.TabIndex = 0;
             // 
@@ -78,6 +78,7 @@
             // labelProductName
             // 
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductName.Location = new System.Drawing.Point(172, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
@@ -90,6 +91,7 @@
             // labelVersion
             // 
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVersion.Location = new System.Drawing.Point(172, 13);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
@@ -102,6 +104,7 @@
             // labelCopyright
             // 
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCopyright.Location = new System.Drawing.Point(172, 26);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
@@ -114,6 +117,7 @@
             // textBoxDescription
             // 
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDescription.Location = new System.Drawing.Point(172, 64);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Multiline = true;
