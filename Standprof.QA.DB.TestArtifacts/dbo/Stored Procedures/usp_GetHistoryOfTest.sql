@@ -2,8 +2,8 @@
 
 CREATE PROCEDURE [dbo].[usp_GetHistoryOfTest] 	
 	(
-	    @project varchar(20),
-		@testId varchar(10)
+	    @project varchar(100),
+		@testId varchar(50)
 	)
 AS
 BEGIN
