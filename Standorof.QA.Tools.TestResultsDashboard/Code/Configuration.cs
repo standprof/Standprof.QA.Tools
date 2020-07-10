@@ -8,7 +8,10 @@ namespace TestResultsDashboard.Code
         {
             TestArtifactsDbConnectionString = ConfigurationManager.ConnectionStrings["TestArtifactsDB"].ToString();
             TicketsManagementSystemUrl = ConfigurationManager.AppSettings["TicketsManagementSystemURL"];
+            CompanyName = ConfigurationManager.AppSettings["CompanyName"];
         }
+
+        public static string CompanyName { get; set; }
 
         public static string TicketsManagementSystemUrl { get; set; }
 
