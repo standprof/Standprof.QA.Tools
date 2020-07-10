@@ -20,7 +20,7 @@ namespace TestResultsDashboard.Code.Forms
         {
             InitializeComponent();
             InitialiseProjectsCombobox();
-            this.Text = $"{CompanyName} - {this.Text}";
+            this.Text = $"{Configuration.CompanyName} - {this.Text}";
             testsRanAfterDateTimePicker.Format = DateTimePickerFormat.Custom;
             testsRanAfterDateTimePicker.CustomFormat = "ddd dd MMM yyyy HH:mm";
             testsRanAfterDateTimePicker.Value = DateTime.Now.Subtract(TimeSpan.FromDays(1));
