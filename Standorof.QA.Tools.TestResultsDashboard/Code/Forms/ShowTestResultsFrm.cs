@@ -23,6 +23,7 @@ namespace TestResultsDashboard.Code.Forms
 
             testsRanAfterDateTimePicker.Format = DateTimePickerFormat.Custom;
             testsRanAfterDateTimePicker.CustomFormat = "ddd dd MMM yyyy HH:mm";
+            testsRanAfterDateTimePicker.Value = DateTime.Now.Subtract(TimeSpan.FromDays(1));
         }
 
         private void InitialiseProjectsCombobox()
@@ -74,19 +75,19 @@ namespace TestResultsDashboard.Code.Forms
                 if (_testDetailsTable.Rows.Count == 0)
                 {
                     MessageBox.Show("No test results are found. Try other search criteria.");
+
+                    summaryGrid.DataSource = null;
+                    summaryGrid.Refresh();
+
+                    detailsGrid.DataSource = null;
+                    summaryGrid.Refresh();
+
                     return;
                 }
 
                 summaryGrid.DataSource = testSummaryTable;
-                summaryGrid.Refresh();
                 summaryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-                if (_testDetailsTable.Rows.Count == 0)
-                {
-                    detailsGrid.DataSource = null;
-                    return;
-                }
-
+               
                 detailsGrid.DataSource = _testDetailsTable;
                 detailsGrid.Columns["TestSummary"].Width = 300;
             }
@@ -99,6 +100,7 @@ namespace TestResultsDashboard.Code.Forms
             {
                 Cursor.Current = Cursors.Default;
                 summaryGrid.Refresh();
+                detailsGrid.Refresh();
             }
         }
 
