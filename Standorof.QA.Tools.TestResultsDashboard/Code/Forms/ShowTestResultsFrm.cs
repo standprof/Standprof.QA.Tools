@@ -143,13 +143,12 @@ namespace TestResultsDashboard.Code.Forms
 
         private void DisplayTestHistory(string project, string testId)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
+            var testHistoryList = new MongoDbQueries().QueryTestHistory(project, testId);
+
             try
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                var testHistoryList = new MongoDbQueries().QueryTestHistoryFromDb(project, testId);
-
-
                 testHistoryGrid.DataSource = testHistoryList;
                 testHistoryGrid.Columns["TestSummary"].Width = 300;
 

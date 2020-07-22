@@ -10,6 +10,152 @@ namespace TestResultsDashboard.Code
 {
     public class MongoDbQueries
     {
+        private readonly BsonDocument _testResultsDetailsMatch = new BsonDocument
+            {
+                {
+                    "$group",
+                    new BsonDocument
+                    {
+                        {
+                            "_id", new BsonDocument
+                            {
+                                {"TestId", "$TestId"},
+                                {"Parameter", "$Parameter"}
+                            }
+},
+                        {
+                            "TestId", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestId"
+                                }
+                            }
+                        },
+                        {
+                            "TestType", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestType"
+                                }
+                            }
+                        },
+                        {
+                            "Project", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Project"
+                                }
+                            }
+                        },
+                        {
+                            "Feature", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Feature"
+                                }
+                            }
+                        },
+                        {
+                            "TestSummary", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestSummary"
+                                }
+                            }
+                        },
+                        {
+                            "Parameter", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Parameter"
+                                }
+                            }
+                        },
+                        {
+                            "TestResult", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestResult"
+                                }
+                            }
+                        },
+                        {
+                            "Bugs", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Bugs"
+                                }
+                            }
+                        },
+                        {
+                            "Error", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Error"
+                                }
+                            }
+                        },
+                        {
+                            "TestDateTime", new BsonDocument
+                            {
+                                {
+                                    "$last", new BsonDocument
+                                    {
+                                        {
+                                            "$dateToString", new BsonDocument
+                                            {
+                                                {"date", "$TestDateTime"},
+                                                {"timezone", "Europe/London"}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "TestSteps", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestSteps"
+                                }
+                            }
+                        },
+                        {
+                            "Tags", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Tags"
+                                }
+                            }
+                        },
+                        {
+                            "Browser", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Browser"
+                                }
+                            }
+                        },
+                        {
+                            "TestEnvironment", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestEnvironment"
+                                }
+                            }
+                        },
+                        {
+                            "TestMachine", new BsonDocument
+                            {
+                                {
+                                    "$last", "$TestMachine"
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
         private IMongoCollection<TestResults> GetTestResultsCollection()
         {
             var client = new MongoClient(Configuration.TestArtifactsDbConnectionString);
@@ -144,153 +290,7 @@ namespace TestResultsDashboard.Code
         {
             var collection = GetTestResultsCollection();
 
-            var match = new BsonDocument
-            {
-                {
-                    "$group",
-                    new BsonDocument
-                    {
-                        {
-                            "_id", new BsonDocument
-                            {
-                                {"TestId", "$TestId"},
-                                {"Parameter", "$Parameter"}
-                            }
-                        },
-                        {
-                            "TestId", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestId"
-                                }
-                            }
-                        },
-                        {
-                            "TestType", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestType"
-                                }
-                            }
-                        },
-                        {
-                            "Project", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Project"
-                                }
-                            }
-                        },
-                        {
-                            "Feature", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Feature"
-                                }
-                            }
-                        },
-                        {
-                            "TestSummary", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestSummary"
-                                }
-                            }
-                        },
-                        {
-                            "Parameter", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Parameter"
-                                }
-                            }
-                        },
-                        {
-                            "TestResult", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestResult"
-                                }
-                            }
-                        },
-                        {
-                            "Bugs", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Bugs"
-                                }
-                            }
-                        },
-                        {
-                            "Error", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Error"
-                                }
-                            }
-                        },
-                        {
-                            "TestDateTime", new BsonDocument
-                            {
-                                {
-                                    "$last", new BsonDocument
-                                    {
-                                        {
-                                            "$dateToString", new BsonDocument
-                                            {
-                                                {"date", "$TestDateTime"},
-                                                {"timezone", "Europe/London"}
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            "TestSteps", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestSteps"
-                                }
-                            }
-                        },
-                        {
-                            "Tags", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Tags"
-                                }
-                            }
-                        },
-                        {
-                            "Browser", new BsonDocument
-                            {
-                                {
-                                    "$last", "$Browser"
-                                }
-                            }
-                        },
-                        {
-                            "TestEnvironment", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestEnvironment"
-                                }
-                            }
-                        },
-                        {
-                            "TestMachine", new BsonDocument
-                            {
-                                {
-                                    "$last", "$TestMachine"
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-
-            var pipeline = new[] {match};
+            var pipeline = new[] {_testResultsDetailsMatch};
             var result = collection.Aggregate<TestResults>(pipeline).ToList();
 
             var allTests = result.AsQueryable()
@@ -304,14 +304,19 @@ namespace TestResultsDashboard.Code
             return allTestsTable;
         }
 
-        public DataTable QueryTestHistoryFromDb(string project, string testId)
+        public DataTable QueryTestHistory(string project, string testId)
         {
             var collection = GetTestResultsCollection();
 
-            var testHistoryList = collection.AsQueryable()
+            var pipeline = new[] { _testResultsDetailsMatch };
+            var result = collection.Aggregate<TestResults>(pipeline).ToList();
+
+            var testHistoryList = result.AsQueryable()
                 .Where(s =>
                     s.Project == project &&
-                    s.TestId == testId);
+                    s.TestId == testId)
+                .OrderByDescending(o => o.TestDateTime);
+                
 
             var allTestsTable = JsonConvert.DeserializeObject<DataTable>(JsonConvert.SerializeObject(testHistoryList));
 
