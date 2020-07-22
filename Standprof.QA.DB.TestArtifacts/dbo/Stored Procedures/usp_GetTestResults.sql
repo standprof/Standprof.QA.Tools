@@ -9,8 +9,8 @@
 
 CREATE PROCEDURE [dbo].[usp_GetTestResults] 	
 	(
-	@project varchar (100) = 'TableRes',
-	@environment varchar (20) = 'develop',
+	@project varchar (100),
+	@environment varchar (20),
 	@testDate varchar(30)
 	)
 AS
