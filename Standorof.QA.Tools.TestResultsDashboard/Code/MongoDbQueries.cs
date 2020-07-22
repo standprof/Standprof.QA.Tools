@@ -54,12 +54,20 @@ namespace TestResultsDashboard.Code
                                 {"Parameter", "$Parameter"}
                             }
                         },
-                        //{"_id", "$TestId"},
                         {
                             "TestDateTime", new BsonDocument
                             {
                                 {
-                                    "$last", "$TestDateTime"
+                                    "$last", new BsonDocument
+                                    {
+                                        {
+                                            "$dateToString", new BsonDocument
+                                            {
+                                                {"date", "$TestDateTime"},
+                                                {"timezone", "Europe/London"}
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -103,7 +111,10 @@ namespace TestResultsDashboard.Code
             var result = collection.Aggregate<TestResults>(pipeline).ToList();
 
             var selectedTests = result.AsQueryable()
-                .Where(s => s.Project == project && s.TestEnvironment == testEnvironment && s.TestDateTime >= testDate);
+                .Where(s =>
+                    s.Project == project &&
+                    s.TestEnvironment == testEnvironment &&
+                    s.TestDateTime.CompareTo(testDate) >= 0);
 
 
             var passedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestResult == "Pass").ToString());
@@ -146,7 +157,6 @@ namespace TestResultsDashboard.Code
                                 {"Parameter", "$Parameter"}
                             }
                         },
-                        //{"_id", "$TestId"},
                         {
                             "TestId", new BsonDocument
                             {
@@ -223,7 +233,16 @@ namespace TestResultsDashboard.Code
                             "TestDateTime", new BsonDocument
                             {
                                 {
-                                    "$last", "$TestDateTime"
+                                    "$last", new BsonDocument
+                                    {
+                                        {
+                                            "$dateToString", new BsonDocument
+                                            {
+                                                {"date", "$TestDateTime"},
+                                                {"timezone", "Europe/London"}
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -275,8 +294,10 @@ namespace TestResultsDashboard.Code
             var result = collection.Aggregate<TestResults>(pipeline).ToList();
 
             var allTests = result.AsQueryable()
-                .Where(s => s.Project == project && s.TestEnvironment == testEnvironment && s.TestDateTime >= testDate)
-                .ToList();
+                .Where(s =>
+                    s.Project == project &&
+                    s.TestEnvironment == testEnvironment &&
+                    s.TestDateTime.CompareTo(testDate) >= 0);
 
             var allTestsTable = JsonConvert.DeserializeObject<DataTable>(JsonConvert.SerializeObject(allTests));
 
@@ -288,7 +309,9 @@ namespace TestResultsDashboard.Code
             var collection = GetTestResultsCollection();
 
             var testHistoryList = collection.AsQueryable()
-                .Where(s => s.Project == project && s.TestId == testId);
+                .Where(s =>
+                    s.Project == project &&
+                    s.TestId == testId);
 
             var allTestsTable = JsonConvert.DeserializeObject<DataTable>(JsonConvert.SerializeObject(testHistoryList));
 
