@@ -297,7 +297,8 @@ namespace TestResultsDashboard.Code
                 .Where(s =>
                     s.Project == project &&
                     s.TestEnvironment == testEnvironment &&
-                    s.TestDateTime.CompareTo(testDate) >= 0);
+                    s.TestDateTime.CompareTo(testDate) >= 0)
+                .OrderBy(o => o.TestResult).ThenBy(o => o.Feature).ThenBy(o => o.TestSummary);
 
             var allTestsTable = JsonConvert.DeserializeObject<DataTable>(JsonConvert.SerializeObject(allTests));
 
