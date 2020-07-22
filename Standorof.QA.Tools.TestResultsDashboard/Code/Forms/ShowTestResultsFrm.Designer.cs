@@ -161,6 +161,7 @@
             this.detailsGrid.Name = "detailsGrid";
             this.detailsGrid.ReadOnly = true;
             this.detailsGrid.RowHeadersWidth = 51;
+            this.detailsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.detailsGrid.Size = new System.Drawing.Size(1000, 379);
             this.detailsGrid.TabIndex = 4;
             this.detailsGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailsGrid_CellDoubleClick);

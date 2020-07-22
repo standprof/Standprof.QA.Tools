@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -8,12 +10,13 @@ using System.Linq;
 using System.Windows.Forms;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using TestResultsDashboard.Code.Models;
 
 namespace TestResultsDashboard.Code.Forms
 {
     public partial class ShowTestResultsFrm : Form
     {
-        private DataSet _searchResultsDataSet;
+        private DataTable _testSummaryTable;
         private DataTable _testDetailsTable;
         
         public ShowTestResultsFrm()
@@ -28,7 +31,7 @@ namespace TestResultsDashboard.Code.Forms
 
         private void InitialiseProjectsCombobox()
         {
-            var items = new DbQueries().QueryProjects().Rows.Cast<DataRow>().Select(r => r[0]).ToArray();
+            var items = new MongoDbQueries().QueryProjects();
 
             if (items.Length == 0)
             {
@@ -59,19 +62,17 @@ namespace TestResultsDashboard.Code.Forms
 
         internal void DisplayTestResultsSummary()
         {
+            Cursor.Current = Cursors.WaitCursor;
+
+            var project = projectsDropdown.Text;
+            var testEnvironment = environmentsDropdown.Text;
+            var testDate = DateTime.Parse(testsRanAfterDateTimePicker.Text);
+
+            _testSummaryTable = new MongoDbQueries().QueryTestResultsSummary(project, testEnvironment, testDate);
+            _testDetailsTable = new MongoDbQueries().QueryTestResultsDetails(project, testEnvironment, testDate);
+
             try
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                var project = projectsDropdown.Text;
-                var testEnvironment = environmentsDropdown.Text;
-                var testDate = DateTime.Parse(testsRanAfterDateTimePicker.Text).ToString("MM-dd-yyyy hh:mm");
-
-                _searchResultsDataSet = new DbQueries().QueryTestResultsSummary(project, testEnvironment, testDate);
-
-                var testSummaryTable = _searchResultsDataSet.Tables[0];
-                _testDetailsTable = _searchResultsDataSet.Tables[1];
-
                 if (_testDetailsTable.Rows.Count == 0)
                 {
                     MessageBox.Show("No test results are found. Try other search criteria.");
@@ -85,7 +86,7 @@ namespace TestResultsDashboard.Code.Forms
                     return;
                 }
 
-                summaryGrid.DataSource = testSummaryTable;
+                summaryGrid.DataSource = _testSummaryTable;
                 summaryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                
                 detailsGrid.DataSource = _testDetailsTable;
@@ -119,10 +120,12 @@ namespace TestResultsDashboard.Code.Forms
             }
 
             string keyword = txtAnyText.Text;
+
             string sqlWhere =
                 $"Feature like '%{keyword}%' OR TestSummary like '%{keyword}%' OR TestSteps like '%{keyword}%' OR Error like '%{keyword}%'";
-            var selectedRows = _searchResultsDataSet.Tables[1].Select(sqlWhere);
-            if (selectedRows.Length > 0)
+            var selectedRows = _testDetailsTable.Select(sqlWhere);
+            
+            if (selectedRows.Any())
             {
                 var testDetailsTableFiltered = selectedRows.CopyToDataTable();
                 detailsGrid.DataSource = testDetailsTableFiltered;
@@ -136,20 +139,21 @@ namespace TestResultsDashboard.Code.Forms
             }
         }
 
+
+
         private void DisplayTestHistory(string project, string testId)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var testHistoryDataSet = new DbQueries().QueryTestHistoryFromDb(project, testId);
+                var testHistoryList = new MongoDbQueries().QueryTestHistoryFromDb(project, testId);
 
-                var testHistoryTable = testHistoryDataSet.Tables[0];
 
-                testHistoryGrid.DataSource = testHistoryTable;
+                testHistoryGrid.DataSource = testHistoryList;
                 testHistoryGrid.Columns["TestSummary"].Width = 300;
 
-                if (testHistoryTable.Rows.Count == 0)
+                if (testHistoryList.Rows.Count == 0)
                 {
                     testHistoryGrid.DataSource = null;
                 }
@@ -173,23 +177,22 @@ namespace TestResultsDashboard.Code.Forms
 
         private void detailsGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var testId = ((DataTable) ((DataGridView) sender).DataSource)
-                .Rows[e.RowIndex]["TestId"].ToString();
+            var testId = ((DataGridView)sender).CurrentRow.Cells["TestId"].Value.ToString();
 
             Tabs.SelectTab(historyOfTestTab);
 
             testIdTextBoxOnHistoryTab.Text = testId;
             projectsDropdownOnHistoryTab.Text = projectsDropdown.Text;
-            
+
             DisplayTestHistory(projectsDropdown.Text, testId);
         }
 
         private void ExportToExcelBtn_Click(object sender, EventArgs e)
         {
-            ExportToExcel(_searchResultsDataSet);
+            ExportToExcel(_testSummaryTable, _testDetailsTable);
         }
 
-        private void ExportToExcel(DataSet resultsDataSet)
+        private void ExportToExcel(DataTable testSummaryTable, DataTable testDetailsList)
         {
             var tempFolder = Environment.GetEnvironmentVariable("TEMP");
             var fileFullPath = Path.Combine(tempFolder ?? throw new InvalidOperationException(), $@"TestResults_{DateTime.Now:yyyyMMdd-HHmm}.xlsx");
@@ -198,11 +201,11 @@ namespace TestResultsDashboard.Code.Forms
             {
                 var summaryWorksheet = excelPackage.Workbook.Worksheets.Add("Summary");
 
-                summaryWorksheet.Cells["A1"].LoadFromDataTable(resultsDataSet.Tables[0], true);
+                summaryWorksheet.Cells["A1"].LoadFromDataTable(testSummaryTable, true);
 
                 var detailsWorksheet = excelPackage.Workbook.Worksheets.Add("Details");
 
-                detailsWorksheet.Cells["A1"].LoadFromDataTable(resultsDataSet.Tables[1], true);
+                detailsWorksheet.Cells["A1"].LoadFromDataTable(testDetailsList, true);
 
 
                 var columnNames = detailsWorksheet
@@ -218,7 +221,7 @@ namespace TestResultsDashboard.Code.Forms
                 {
                     var value = detailsWorksheet.Cells[r, testIdTimeColumnIndex].Value;
                     detailsWorksheet.Cells[r, testIdTimeColumnIndex].Hyperlink =
-                        new Uri(string.Concat("https://standprof.atlassian.net/browse/", value));
+                        new Uri(string.Concat(Configuration.TicketsManagementSystemUrl, value));
                     detailsWorksheet.Cells[r, testIdTimeColumnIndex].Value = value;
                     detailsWorksheet.Cells[r, testIdTimeColumnIndex].Style.Font.UnderLine = true;
                     detailsWorksheet.Cells[r, testIdTimeColumnIndex].Style.Font.Color.SetColor(Color.Blue);
@@ -250,7 +253,7 @@ namespace TestResultsDashboard.Code.Forms
         {
             var project = ((ComboBox) sender).Text;
 
-            var items = new DbQueries().QueryTestEnvironments(project).Rows.Cast<DataRow>().Select(r => r[0]).ToArray();
+            var items = new MongoDbQueries().QueryTestEnvironments(project);
 
             if (items.Length == 0) return;
 
@@ -258,5 +261,7 @@ namespace TestResultsDashboard.Code.Forms
             environmentsDropdown.Items.AddRange(items);
             environmentsDropdown.Text = items[0].ToString();
         }
+
+
     }
 }
