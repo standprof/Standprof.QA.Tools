@@ -47,12 +47,27 @@ namespace TestResultsDashboard.Code
                     "$group",
                     new BsonDocument
                     {
-                        {"_id", "$TestId"},
+                        {
+                            "_id", new BsonDocument
+                            {
+                                {"TestId", "$TestId"},
+                                {"Parameter", "$Parameter"}
+                            }
+                        },
+                        //{"_id", "$TestId"},
                         {
                             "TestDateTime", new BsonDocument
                             {
                                 {
                                     "$last", "$TestDateTime"
+                                }
+                            }
+                        },
+                        {
+                            "Parameter", new BsonDocument
+                            {
+                                {
+                                    "$last", "$Parameter"
                                 }
                             }
                         },
@@ -94,15 +109,21 @@ namespace TestResultsDashboard.Code
             var passedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestResult == "Pass").ToString());
 
             var failedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestResult == "Fail").ToString());
-            
+
             var totalTestsAmount = Convert.ToDecimal(selectedTests.Count().ToString());
 
             var summaryTable = new DataTable();
             summaryTable.Columns.Add("Status");
             summaryTable.Columns.Add("Amount");
             summaryTable.Columns.Add("%");
-            summaryTable.Rows.Add("Pass", passedTestsAmount, $"{Math.Round((passedTestsAmount / totalTestsAmount)*100)}%");
-            summaryTable.Rows.Add("Fail", failedTestsAmount, $"{Math.Round((failedTestsAmount / totalTestsAmount)*100)}%");
+
+            if (totalTestsAmount == 0) return summaryTable;
+
+
+            summaryTable.Rows.Add("Pass", passedTestsAmount,
+                $"{Math.Round(passedTestsAmount / totalTestsAmount * 100)}%");
+            summaryTable.Rows.Add("Fail", failedTestsAmount,
+                $"{Math.Round(failedTestsAmount / totalTestsAmount * 100)}%");
             summaryTable.Rows.Add("Total", totalTestsAmount, "100%");
 
             return summaryTable;
@@ -118,7 +139,14 @@ namespace TestResultsDashboard.Code
                     "$group",
                     new BsonDocument
                     {
-                        {"_id", "$TestId"},
+                        {
+                            "_id", new BsonDocument
+                            {
+                                {"TestId", "$TestId"},
+                                {"Parameter", "$Parameter"}
+                            }
+                        },
+                        //{"_id", "$TestId"},
                         {
                             "TestId", new BsonDocument
                             {
