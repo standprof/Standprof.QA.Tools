@@ -14,7 +14,7 @@ namespace TestResultsDashboard.Code.Models
         public string TestSummary { get; set; }
         public string Parameter { get; set; }
         public string TestSteps { get; set; }
-        public string TestResult { get; set; }
+        public string TestOutput { get; set; }
         public DateTime TestDateTime { get; set; }
         public string TestMachine { get; set; }
         //public string Importance { get; set; }
