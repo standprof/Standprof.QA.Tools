@@ -72,10 +72,10 @@ namespace TestResultsDashboard.Code
                             }
                         },
                         {
-                            "TestResult", new BsonDocument
+                            "TestOutput", new BsonDocument
                             {
                                 {
-                                    "$last", "$TestResult"
+                                    "$last", "$TestOutput"
                                 }
                             }
                         },
@@ -226,10 +226,10 @@ namespace TestResultsDashboard.Code
                             }
                         },
                         {
-                            "TestResult", new BsonDocument
+                            "TestOutput", new BsonDocument
                             {
                                 {
-                                    "$last", "$TestResult"
+                                    "$last", "$TestOutput"
                                 }
                             }
                         },
@@ -263,9 +263,9 @@ namespace TestResultsDashboard.Code
                     s.TestDateTime.CompareTo(testDate) >= 0);
 
 
-            var passedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestResult == "Pass").ToString());
+            var passedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestOutput == "Pass").ToString());
 
-            var failedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestResult == "Fail").ToString());
+            var failedTestsAmount = Convert.ToDecimal(selectedTests.Count(s => s.TestOutput == "Fail").ToString());
 
             var totalTestsAmount = Convert.ToDecimal(selectedTests.Count().ToString());
 
@@ -298,7 +298,7 @@ namespace TestResultsDashboard.Code
                     s.Project == project &&
                     s.TestEnvironment == testEnvironment &&
                     s.TestDateTime.CompareTo(testDate) >= 0)
-                .OrderBy(o => o.TestResult).ThenBy(o => o.Feature).ThenBy(o => o.TestSummary);
+                .OrderBy(o => o.TestOutput).ThenBy(o => o.Feature).ThenBy(o => o.TestSummary);
 
             var allTestsTable = JsonConvert.DeserializeObject<DataTable>(JsonConvert.SerializeObject(allTests));
 
